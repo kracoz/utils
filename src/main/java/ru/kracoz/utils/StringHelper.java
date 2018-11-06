@@ -17,13 +17,17 @@ public class StringHelper {
         return Pattern.compile(pattern).matcher(text).matches();
     }
 
-    public static String getGenerateValue(String value) throws Exception {
-        if (value.startsWith("/")) {
-            return generateValue(value.replaceFirst("/", ""));
-        } else {
+    public static String getGenerateValue(String value) {
+        try {
+            if (value.startsWith("/")) {
+
+                return generateValue(value.replaceFirst("/", ""));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
             return value;
         }
-    }
 
     public static String generateValue(String variable) throws Exception {
         if (!variable.contains("#")) {
