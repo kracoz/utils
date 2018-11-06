@@ -80,6 +80,12 @@ public class StringHelper {
 //                        checkStashKey(stashKey);
 //                        endString = endString+ Stash.getValue(stashKey);
 //                        break;
+                    case 'P':
+                        String propKey = s.replaceFirst("P","");
+                        endString = endString + Props.get(propKey,"");
+                        break;
+                    default:throw new Exception("Шаблон для генерации значения тега содержит неподдерживаемый символю");
+
                 }
             }
         }
