@@ -3,6 +3,7 @@ package ru.kracoz.utils;
 
 import ru.kracoz.utils.entities.StringCompareRule;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class CompareHelper {
@@ -56,6 +57,15 @@ public class CompareHelper {
                 return StringCompareUtils.compare(cell, EMPTY_VALUE, StringCompareUtils.Rule.EQUALS);
             case NOT_EMPTY:
                 return StringCompareUtils.compare(cell, EMPTY_VALUE, StringCompareUtils.Rule.DOES_NOT_EQUAL);
+            //Usage: ##<rule> <format> -- <date>
+            case BEFORE:
+                LocalDateTime beforeTime = DateTimeHelper.parseDateTime(params.get(1), params.get(0));
+                LocalDateTime time = DateTimeHelper.parseDateTime(cell, params.get(0));
+                return time.isBefore(beforeTime);
+            case AFTER:
+                LocalDateTime AfterTime = DateTimeHelper.parseDateTime(params.get(1), params.get(0));
+                LocalDateTime realTime = DateTimeHelper.parseDateTime(cell, params.get(0));
+                return realTime.isAfter(AfterTime);
             default:
                 throw new Error(String.format("Переданное для сравнения правило '%s' не поддерживается.", rule.getRule()));
         }
