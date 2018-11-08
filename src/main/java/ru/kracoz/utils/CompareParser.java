@@ -31,11 +31,7 @@ public class CompareParser {
             String[] array = v.split(RULE_PARAMS_DELIMITER_REGEX, NUMBER_OF_PARTS);
             List<String> params = array.length == ZERO_PARAMETERS_RULE ? ZERO_PARAMETER : parseParameters(array[1]);
             CompareHelper.Rule rule = CompareHelper.Rule.valueOf(array[0].substring(2).toUpperCase());
-            try {
-                checkRuleParamsQtyCompliance(rule, params.size());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            checkRuleParamsQtyCompliance(rule, params.size());
             return new StringCompareRule(rule, params);
         }).collect(Collectors.toList());
     }
@@ -44,7 +40,7 @@ public class CompareParser {
         return Arrays.stream(params.split(PARAMS_DELIMITER_REGEX)).map(StringHelper::getGenerateValue).collect(Collectors.toList());
     }
 
-    private static void checkRuleParamsQtyCompliance(CompareHelper.Rule rule, int paramSize) throws Exception {
+    private static void checkRuleParamsQtyCompliance(CompareHelper.Rule rule, int paramSize) {
         ParamsType type = rule.getParamsType();
         boolean result;
         switch (type) {
@@ -61,7 +57,7 @@ public class CompareParser {
                 result = paramSize > 0;
                 break;
             default:
-                throw new Exception(String.format("Переданный тип параметров '%s' не поддерживается.", type.toString()));
+                throw new Error(String.format("Переданный тип параметров '%s' не поддерживается.", type.toString()));
         }
     }
 
