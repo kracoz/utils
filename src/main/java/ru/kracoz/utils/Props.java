@@ -5,9 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-/**
- * Created by user on 06.11.2018.
- */
+
 public class Props {
 
     private static Props instanse;

@@ -1,6 +1,7 @@
 import ru.kracoz.utils.CompareHelper;
 import ru.kracoz.utils.CompareParser;
 import ru.kracoz.utils.Stash;
+import ru.kracoz.utils.StringHelper;
 import ru.kracoz.utils.entities.StringCompareRule;
 
 import java.util.HashMap;
@@ -18,6 +19,10 @@ public class Example {
         Stash.put("<stash>", "<example>");
 
         System.out.println((String) Stash.getValue("<stash>"));
+        System.out.println("Сгенерированное значение параметра из проперти: " + StringHelper.getGenerateValue("/#Pexample"));
+        System.out.println("Сгенерированное значение параметра из stash: " + StringHelper.getGenerateValue("/#V<stash>"));
+        System.out.println("Сгенерированное значение даты: " + StringHelper.getGenerateValue("/#d(dd.MM.yyyy HH:mm:ss)"));
+        System.out.println(StringHelper.getGenerateValue("/#%My nickname is #_ #Pnickname #_ #n10#_#S5"));
     }
 
     public static boolean checkValueRulesMatch(List<StringCompareRule> rules, String cellValue) {
